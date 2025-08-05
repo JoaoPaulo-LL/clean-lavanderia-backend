@@ -1,0 +1,31 @@
+# Node modules
+node_modules/
+
+# Arquivos de ambiente (segredos, configs locais)
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Cache do npm
+.cache/
+
+# Pastas do sistema
+.DS_Store
+Thumbs.db
+
+# Build (caso você use TypeScript ou bundler)
+dist/
+build/
+
+# Firebase credentials exportadas localmente (se tiver)
+firebase-key.json
+
+# Outros arquivos temporários
+*.local
+*.bak
+*.tmp
+
+projeto-lavanderia-f89b8-firebase-adminsdk-fbsvc-00796fdc1d.json
