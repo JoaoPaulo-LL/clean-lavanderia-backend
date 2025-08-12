@@ -5,6 +5,7 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
+import userRoutes from "./src/routes/user.routes.js";
 
 // Importa a instância do banco de dados Firebase
 import { db } from "./src/config/firebase.js";
@@ -23,7 +24,7 @@ const swaggerOptions = {
       description: "Documentação da API Clean Lavanderia",
     },
   },
-  apis: ["./src/routes/*.ts"],
+  apis: ["./src/routes/*.js"],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
@@ -32,9 +33,8 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
-
+app.use(userRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 
 // Importa e usa as rotas modularizadas
 import testRoutes from "./src/routes/testRoutes.js";
