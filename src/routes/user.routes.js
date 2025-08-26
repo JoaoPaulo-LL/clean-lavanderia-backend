@@ -4,7 +4,7 @@ import { getUserById, createUser } from "../controllers/user.controller.js";
 const router = express.Router();
 /**
  * @swagger
- * /users/{id}:
+ * api/v1/usuarios/{id}:
  *   get:
  *     summary: Busca um usuário por ID
  *     tags:
@@ -21,11 +21,11 @@ const router = express.Router();
  *       404:
  *         description: Usuário não encontrado
  */
-router.get("/users/:id", getUserById);
+router.get("/usuarios/:id", getUserById);
 
 /**
  * @swagger
- * /users:
+ * api/v1/usuarios:
  *   post:
  *     summary: Cria um novo usuário
  *     tags:
@@ -40,6 +40,6 @@ router.get("/users/:id", getUserById);
  *       201:
  *         description: Usuário criado
  */
-router.post("/users", createUser);
+router.post("/usuarios", createUser);
 
 export default router;
