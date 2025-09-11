@@ -5,7 +5,10 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
+
 import userRoutes from "./src/routes/user.routes.js";
+import clientRoutes from "./src/routes/client.routes.js";
+import testRoutes from "./src/routes/testRoutes.js";
 
 // Importa a instância do banco de dados Firebase
 import { db } from "./src/config/firebase.js";
@@ -33,12 +36,14 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(userRoutes);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Importa e usa as rotas modularizadas
-import testRoutes from "./src/routes/testRoutes.js";
+// Rotas
+app.use(userRoutes);
+app.use(clientRoutes);
 app.use(testRoutes);
+
+// Rota para documentação Swagger
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);

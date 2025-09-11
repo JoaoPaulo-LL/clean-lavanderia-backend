@@ -4,12 +4,28 @@ import {
   createClient,
   updateClient,
   deleteClient,
+  getClientAll,
 } from "../controllers/client.controller.js";
 
 const router = express.Router();
 /**
  * @swagger
- * api/v1/clientes/{id}:
+ * /api/v1/clientes:
+ *   get:
+ *     summary: Busca todos os clientes
+ *     tags:
+ *       - Cliente
+ *     responses:
+ *       200:
+ *         description: Lista de clientes encontrada
+ *       404:
+ *         description: Nenhum cliente encontrado
+ */
+router.get("/api/v1/clientes", getClientAll);
+
+/**
+ * @swagger
+ * /api/v1/clientes/{id}:
  *   get:
  *     summary: Busca um cliente por ID
  *     tags:

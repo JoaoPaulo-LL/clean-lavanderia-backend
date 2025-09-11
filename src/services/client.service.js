@@ -1,23 +1,13 @@
 import { db } from "../config/firebase.js";
 
-const clientRef = db.ref("clients"); // chama ref direto no db
-
-export const createClientService = async (clientObj) => {
-  try {
-    const newClientRef = clientRef.push(); // push direto na ref
-    await newClientRef.set(clientObj); // set direto na ref nova
-    return { id: newClientRef.key, ...clientObj };
-  } catch (error) {
-    throw error;
-  }
-};
+const clientRef = db.ref("clientes"); // chama ref direto no db
 
 export const getClientByIdService = async (clientId) => {
   try {
-    const clientRef = db.ref(`clients/${clientId}`); // ref direto no db
+    const clientRef = db.ref(`clientes/${clientId}`); // ref direto no db
     const snapshot = await clientRef.get(); // get direto na ref
     if (snapshot.exists()) {
-      return { id: userId, ...snapshot.val() };
+      return { id: clientId, ...snapshot.val() };
     }
     return null;
   } catch (error) {
@@ -25,9 +15,33 @@ export const getClientByIdService = async (clientId) => {
   }
 };
 
+export const getAllClientService = async () => {
+  try {
+    const snapshot = await clientRef.get();
+
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      return Object.entries(data).map(([id, client]) => ({ id, ...client }));
+    }
+    return [];
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createClientService = async (clientObj) => {
+  try {
+    const newClientRef = clientRef.push();
+    await newClientRef.set(clientObj);
+    return { id: newClientRef.key, ...clientObj };
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const updateClientService = async (clientId, updates) => {
   try {
-    const clientRef = db.ref(`clients/${clientId}`);
+    const clientRef = db.ref(`clientes/${clientId}`);
     await clientRef.update(updates);
     return { id: clientId, ...updates };
   } catch (error) {
@@ -37,7 +51,7 @@ export const updateClientService = async (clientId, updates) => {
 
 export const deleteClientService = async (clientId) => {
   try {
-    const clientRef = db.ref(`clients/${clientId}`);
+    const clientRef = db.ref(`clientes/${clientId}`);
     await clientRef.remove();
     return { id: clientId, deleted: true };
   } catch (error) {
