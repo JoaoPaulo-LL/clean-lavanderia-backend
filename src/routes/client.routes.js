@@ -113,6 +113,7 @@ router.get("/api/v1/clientes/:id", getClientById);
  *           enum: [ativo, inativo]
  *           example: ativo
  *
+ * 
 
  * /api/v1/clientes:
  *   post:

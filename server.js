@@ -8,6 +8,7 @@ import swaggerJsdoc from "swagger-jsdoc";
 
 import userRoutes from "./src/routes/user.routes.js";
 import clientRoutes from "./src/routes/client.routes.js";
+import checkinRoutes from "./src/routes/checkin.routes.js";
 import testRoutes from "./src/routes/testRoutes.js";
 
 // Importa a instância do banco de dados Firebase
@@ -40,6 +41,7 @@ app.use(express.json());
 // Rotas
 app.use(userRoutes);
 app.use(clientRoutes);
+app.use(checkinRoutes);
 app.use(testRoutes);
 
 // Rota para documentação Swagger
