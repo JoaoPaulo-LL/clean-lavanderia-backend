@@ -1,6 +1,6 @@
 import { db } from "../config/firebase.js";
 
-const checkinRef = db.ref("checkins"); // chama ref direto no db
+const checkinRef = db.ref("checkins");
 
 export const getCheckinByIdService = async (checkinId) => {
   try {
@@ -9,7 +9,7 @@ export const getCheckinByIdService = async (checkinId) => {
 
     if (snapshot.exists()) {
       return { id: checkinId, ...snapshot.val() };
-    }
+    }F
     return null;
   } catch (error) {
     throw error;
